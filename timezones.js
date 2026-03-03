@@ -1,0 +1,133 @@
+const TIMEZONE_DATA = [
+  // North America
+  { city: "New York", country: "United States", region: "North America", timezone: "America/New_York", keywords: ["New York State", "NY", "EST", "EDT", "Manhattan", "Brooklyn", "Queens"] },
+  { city: "Los Angeles", country: "United States", region: "North America", timezone: "America/Los_Angeles", keywords: ["California", "CA", "PST", "PDT", "Hollywood", "LA"] },
+  { city: "Chicago", country: "United States", region: "North America", timezone: "America/Chicago", keywords: ["Illinois", "IL", "CST", "CDT", "Midwest"] },
+  { city: "Denver", country: "United States", region: "North America", timezone: "America/Denver", keywords: ["Colorado", "CO", "MST", "MDT", "Mountain Time"] },
+  { city: "Phoenix", country: "United States", region: "North America", timezone: "America/Phoenix", keywords: ["Arizona", "AZ", "MST"] },
+  { city: "Anchorage", country: "United States", region: "North America", timezone: "America/Anchorage", keywords: ["Alaska", "AK", "AKST", "AKDT"] },
+  { city: "Honolulu", country: "United States", region: "North America", timezone: "Pacific/Honolulu", keywords: ["Hawaii", "HI", "HST", "Oahu"] },
+  { city: "Toronto", country: "Canada", region: "North America", timezone: "America/Toronto", keywords: ["Ontario", "ON", "EST", "EDT"] },
+  { city: "Vancouver", country: "Canada", region: "North America", timezone: "America/Vancouver", keywords: ["British Columbia", "BC", "PST", "PDT"] },
+  { city: "Edmonton", country: "Canada", region: "North America", timezone: "America/Edmonton", keywords: ["Alberta", "AB", "MST", "MDT"] },
+  { city: "Mexico City", country: "Mexico", region: "North America", timezone: "America/Mexico_City", keywords: ["CDMX", "CST", "CDT", "Ciudad de México"] },
+
+  // Central & South America
+  { city: "São Paulo", country: "Brazil", region: "South America", timezone: "America/Sao_Paulo", keywords: ["BRT", "SP", "Sao Paulo"] },
+  { city: "Buenos Aires", country: "Argentina", region: "South America", timezone: "America/Argentina/Buenos_Aires", keywords: ["ART", "BA", "CABA"] },
+  { city: "Santiago", country: "Chile", region: "South America", timezone: "America/Santiago", keywords: ["CLT", "CLST"] },
+  { city: "Lima", country: "Peru", region: "South America", timezone: "America/Lima", keywords: ["PET"] },
+  { city: "Bogotá", country: "Colombia", region: "South America", timezone: "America/Bogota", keywords: ["COT", "Bogota"] },
+  { city: "Caracas", country: "Venezuela", region: "South America", timezone: "America/Caracas", keywords: ["VET"] },
+  { city: "Panama City", country: "Panama", region: "Central America", timezone: "America/Panama", keywords: ["EST"] },
+  { city: "San Juan", country: "Puerto Rico", region: "Caribbean", timezone: "America/Puerto_Rico", keywords: ["AST", "PR"] },
+  { city: "Havana", country: "Cuba", region: "Caribbean", timezone: "America/Havana", keywords: ["CST", "CDT", "La Habana"] },
+
+  // Europe
+  { city: "London", country: "United Kingdom", region: "Europe", timezone: "Europe/London", keywords: ["England", "UK", "GMT", "BST", "Great Britain"] },
+  { city: "Paris", country: "France", region: "Europe", timezone: "Europe/Paris", keywords: ["CET", "CEST", "Île-de-France"] },
+  { city: "Berlin", country: "Germany", region: "Europe", timezone: "Europe/Berlin", keywords: ["CET", "CEST", "Deutschland"] },
+  { city: "Madrid", country: "Spain", region: "Europe", timezone: "Europe/Madrid", keywords: ["CET", "CEST", "España"] },
+  { city: "Rome", country: "Italy", region: "Europe", timezone: "Europe/Rome", keywords: ["CET", "CEST", "Roma", "Italia"] },
+  { city: "Amsterdam", country: "Netherlands", region: "Europe", timezone: "Europe/Amsterdam", keywords: ["CET", "CEST", "Holland", "Noord-Holland"] },
+  { city: "Brussels", country: "Belgium", region: "Europe", timezone: "Europe/Brussels", keywords: ["CET", "CEST", "Bruxelles"] },
+  { city: "Zurich", country: "Switzerland", region: "Europe", timezone: "Europe/Zurich", keywords: ["CET", "CEST", "Zürich"] },
+  { city: "Vienna", country: "Austria", region: "Europe", timezone: "Europe/Vienna", keywords: ["CET", "CEST", "Wien", "Österreich"] },
+  { city: "Stockholm", country: "Sweden", region: "Europe", timezone: "Europe/Stockholm", keywords: ["CET", "CEST", "Sverige"] },
+  { city: "Oslo", country: "Norway", region: "Europe", timezone: "Europe/Oslo", keywords: ["CET", "CEST", "Norge"] },
+  { city: "Copenhagen", country: "Denmark", region: "Europe", timezone: "Europe/Copenhagen", keywords: ["CET", "CEST", "København", "Danmark"] },
+  { city: "Helsinki", country: "Finland", region: "Europe", timezone: "Europe/Helsinki", keywords: ["EET", "EEST", "Suomi"] },
+  { city: "Warsaw", country: "Poland", region: "Europe", timezone: "Europe/Warsaw", keywords: ["CET", "CEST", "Warszawa", "Polska"] },
+  { city: "Prague", country: "Czech Republic", region: "Europe", timezone: "Europe/Prague", keywords: ["CET", "CEST", "Praha", "Czechia"] },
+  { city: "Budapest", country: "Hungary", region: "Europe", timezone: "Europe/Budapest", keywords: ["CET", "CEST", "Magyarország"] },
+  { city: "Bucharest", country: "Romania", region: "Europe", timezone: "Europe/Bucharest", keywords: ["EET", "EEST", "București"] },
+  { city: "Athens", country: "Greece", region: "Europe", timezone: "Europe/Athens", keywords: ["EET", "EEST", "Athína", "Hellas"] },
+  { city: "Lisbon", country: "Portugal", region: "Europe", timezone: "Europe/Lisbon", keywords: ["WET", "WEST", "Lisboa"] },
+  { city: "Dublin", country: "Ireland", region: "Europe", timezone: "Europe/Dublin", keywords: ["GMT", "IST", "Éire"] },
+  { city: "Reykjavik", country: "Iceland", region: "Europe", timezone: "Atlantic/Reykjavik", keywords: ["GMT", "Reykjavík"] },
+  { city: "Moscow", country: "Russia", region: "Europe", timezone: "Europe/Moscow", keywords: ["MSK", "Moskva"] },
+  { city: "Istanbul", country: "Turkey", region: "Europe", timezone: "Europe/Istanbul", keywords: ["TRT", "Constantinople", "Türkiye"] },
+  { city: "Kyiv", country: "Ukraine", region: "Europe", timezone: "Europe/Kyiv", keywords: ["EET", "EEST", "Kiev"] },
+  { city: "Belgrade", country: "Serbia", region: "Europe", timezone: "Europe/Belgrade", keywords: ["CET", "CEST", "Beograd", "Srbija"] },
+
+  // Africa
+  { city: "Cairo", country: "Egypt", region: "Africa", timezone: "Africa/Cairo", keywords: ["EET", "Al-Qahira"] },
+  { city: "Lagos", country: "Nigeria", region: "Africa", timezone: "Africa/Lagos", keywords: ["WAT", "West Africa"] },
+  { city: "Johannesburg", country: "South Africa", region: "Africa", timezone: "Africa/Johannesburg", keywords: ["SAST", "Joburg", "Gauteng"] },
+  { city: "Nairobi", country: "Kenya", region: "Africa", timezone: "Africa/Nairobi", keywords: ["EAT", "East Africa"] },
+  { city: "Casablanca", country: "Morocco", region: "Africa", timezone: "Africa/Casablanca", keywords: ["WET", "WEST", "Dar el Beida"] },
+  { city: "Accra", country: "Ghana", region: "Africa", timezone: "Africa/Accra", keywords: ["GMT"] },
+  { city: "Addis Ababa", country: "Ethiopia", region: "Africa", timezone: "Africa/Addis_Ababa", keywords: ["EAT"] },
+  { city: "Dar es Salaam", country: "Tanzania", region: "Africa", timezone: "Africa/Dar_es_Salaam", keywords: ["EAT"] },
+  { city: "Tunis", country: "Tunisia", region: "Africa", timezone: "Africa/Tunis", keywords: ["CET"] },
+  { city: "Algiers", country: "Algeria", region: "Africa", timezone: "Africa/Algiers", keywords: ["CET", "Alger"] },
+
+  // Middle East
+  { city: "Dubai", country: "United Arab Emirates", region: "Middle East", timezone: "Asia/Dubai", keywords: ["GST", "UAE", "Emirates"] },
+  { city: "Riyadh", country: "Saudi Arabia", region: "Middle East", timezone: "Asia/Riyadh", keywords: ["AST", "KSA"] },
+  { city: "Doha", country: "Qatar", region: "Middle East", timezone: "Asia/Qatar", keywords: ["AST"] },
+  { city: "Kuwait City", country: "Kuwait", region: "Middle East", timezone: "Asia/Kuwait", keywords: ["AST"] },
+  { city: "Tehran", country: "Iran", region: "Middle East", timezone: "Asia/Tehran", keywords: ["IRST", "IRDT", "Persia"] },
+  { city: "Baghdad", country: "Iraq", region: "Middle East", timezone: "Asia/Baghdad", keywords: ["AST"] },
+  { city: "Jerusalem", country: "Israel", region: "Middle East", timezone: "Asia/Jerusalem", keywords: ["IST", "IDT", "Tel Aviv"] },
+  { city: "Beirut", country: "Lebanon", region: "Middle East", timezone: "Asia/Beirut", keywords: ["EET", "EEST"] },
+  { city: "Amman", country: "Jordan", region: "Middle East", timezone: "Asia/Amman", keywords: ["EET", "EEST"] },
+  { city: "Muscat", country: "Oman", region: "Middle East", timezone: "Asia/Muscat", keywords: ["GST"] },
+
+  // South Asia
+  { city: "Mumbai", country: "India", region: "South Asia", timezone: "Asia/Kolkata", keywords: ["IST", "Bombay", "Maharashtra", "MH"] },
+  { city: "Delhi", country: "India", region: "South Asia", timezone: "Asia/Kolkata", keywords: ["IST", "New Delhi", "NCR"] },
+  { city: "Kolkata", country: "India", region: "South Asia", timezone: "Asia/Kolkata", keywords: ["IST", "Calcutta", "West Bengal", "WB"] },
+  { city: "Bangalore", country: "India", region: "South Asia", timezone: "Asia/Kolkata", keywords: ["IST", "Bengaluru", "Karnataka", "KA"] },
+  { city: "Karachi", country: "Pakistan", region: "South Asia", timezone: "Asia/Karachi", keywords: ["PKT", "Sindh"] },
+  { city: "Dhaka", country: "Bangladesh", region: "South Asia", timezone: "Asia/Dhaka", keywords: ["BST", "Dacca"] },
+  { city: "Colombo", country: "Sri Lanka", region: "South Asia", timezone: "Asia/Colombo", keywords: ["SLST"] },
+  { city: "Kathmandu", country: "Nepal", region: "South Asia", timezone: "Asia/Kathmandu", keywords: ["NPT", "Katmandu"] },
+
+  // East & Southeast Asia
+  { city: "Tokyo", country: "Japan", region: "East Asia", timezone: "Asia/Tokyo", keywords: ["JST", "Kanto"] },
+  { city: "Shanghai", country: "China", region: "East Asia", timezone: "Asia/Shanghai", keywords: ["CST", "CT"] },
+  { city: "Beijing", country: "China", region: "East Asia", timezone: "Asia/Shanghai", keywords: ["CST", "CT", "Peking"] },
+  { city: "Hong Kong", country: "China", region: "East Asia", timezone: "Asia/Hong_Kong", keywords: ["HKT", "HK"] },
+  { city: "Seoul", country: "South Korea", region: "East Asia", timezone: "Asia/Seoul", keywords: ["KST", "Korea"] },
+  { city: "Taipei", country: "Taiwan", region: "East Asia", timezone: "Asia/Taipei", keywords: ["CST", "TW"] },
+  { city: "Singapore", country: "Singapore", region: "Southeast Asia", timezone: "Asia/Singapore", keywords: ["SGT", "SG"] },
+  { city: "Bangkok", country: "Thailand", region: "Southeast Asia", timezone: "Asia/Bangkok", keywords: ["ICT", "Krung Thep"] },
+  { city: "Jakarta", country: "Indonesia", region: "Southeast Asia", timezone: "Asia/Jakarta", keywords: ["WIB", "Java"] },
+  { city: "Kuala Lumpur", country: "Malaysia", region: "Southeast Asia", timezone: "Asia/Kuala_Lumpur", keywords: ["MYT", "KL"] },
+  { city: "Manila", country: "Philippines", region: "Southeast Asia", timezone: "Asia/Manila", keywords: ["PHT", "PH"] },
+  { city: "Ho Chi Minh City", country: "Vietnam", region: "Southeast Asia", timezone: "Asia/Ho_Chi_Minh", keywords: ["ICT", "Saigon", "HCMC"] },
+  { city: "Yangon", country: "Myanmar", region: "Southeast Asia", timezone: "Asia/Yangon", keywords: ["MMT", "Rangoon", "Burma"] },
+  { city: "Phnom Penh", country: "Cambodia", region: "Southeast Asia", timezone: "Asia/Phnom_Penh", keywords: ["ICT"] },
+
+  // Central Asia
+  { city: "Almaty", country: "Kazakhstan", region: "Central Asia", timezone: "Asia/Almaty", keywords: ["ALMT", "Alma-Ata"] },
+  { city: "Tashkent", country: "Uzbekistan", region: "Central Asia", timezone: "Asia/Tashkent", keywords: ["UZT"] },
+  { city: "Tbilisi", country: "Georgia", region: "Central Asia", timezone: "Asia/Tbilisi", keywords: ["GET"] },
+  { city: "Baku", country: "Azerbaijan", region: "Central Asia", timezone: "Asia/Baku", keywords: ["AZT"] },
+  { city: "Yerevan", country: "Armenia", region: "Central Asia", timezone: "Asia/Yerevan", keywords: ["AMT"] },
+
+  // Russia (East)
+  { city: "Novosibirsk", country: "Russia", region: "Asia", timezone: "Asia/Novosibirsk", keywords: ["NOVT", "Siberia"] },
+  { city: "Yekaterinburg", country: "Russia", region: "Asia", timezone: "Asia/Yekaterinburg", keywords: ["YEKT", "Urals"] },
+  { city: "Vladivostok", country: "Russia", region: "Asia", timezone: "Asia/Vladivostok", keywords: ["VLAT", "Far East Russia"] },
+
+  // Oceania
+  { city: "Sydney", country: "Australia", region: "Oceania", timezone: "Australia/Sydney", keywords: ["AEST", "AEDT", "New South Wales", "NSW"] },
+  { city: "Melbourne", country: "Australia", region: "Oceania", timezone: "Australia/Melbourne", keywords: ["AEST", "AEDT", "Victoria", "VIC"] },
+  { city: "Brisbane", country: "Australia", region: "Oceania", timezone: "Australia/Brisbane", keywords: ["AEST", "Queensland", "QLD"] },
+  { city: "Perth", country: "Australia", region: "Oceania", timezone: "Australia/Perth", keywords: ["AWST", "Western Australia", "WA"] },
+  { city: "Adelaide", country: "Australia", region: "Oceania", timezone: "Australia/Adelaide", keywords: ["ACST", "ACDT", "South Australia", "SA"] },
+  { city: "Auckland", country: "New Zealand", region: "Oceania", timezone: "Pacific/Auckland", keywords: ["NZST", "NZDT", "NZ"] },
+  { city: "Wellington", country: "New Zealand", region: "Oceania", timezone: "Pacific/Auckland", keywords: ["NZST", "NZDT", "NZ"] },
+  { city: "Fiji", country: "Fiji", region: "Oceania", timezone: "Pacific/Fiji", keywords: ["FJT", "Suva"] },
+
+  // Atlantic
+  { city: "Azores", country: "Portugal", region: "Atlantic", timezone: "Atlantic/Azores", keywords: ["AZOT", "AZOST"] },
+  { city: "Cape Verde", country: "Cape Verde", region: "Atlantic", timezone: "Atlantic/Cape_Verde", keywords: ["CVT", "Cabo Verde"] },
+
+  // Pacific
+  { city: "Samoa", country: "Samoa", region: "Pacific", timezone: "Pacific/Apia", keywords: ["WST", "Apia"] },
+  { city: "Guam", country: "United States", region: "Pacific", timezone: "Pacific/Guam", keywords: ["ChST", "Chamorro"] },
+  { city: "Tahiti", country: "French Polynesia", region: "Pacific", timezone: "Pacific/Tahiti", keywords: ["TAHT", "Papeete"] },
+];

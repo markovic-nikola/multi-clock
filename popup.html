@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="header">
+    <h1 class="header__title">World Clock</h1>
+    <button class="header__format-toggle" id="format-toggle" title="Toggle 12h/24h format">12h</button>
+  </div>
+
+  <div class="search">
+    <input
+      type="text"
+      class="search__input"
+      id="search-input"
+      placeholder="Search city, country, region, or timezone..."
+      autocomplete="off"
+    >
+    <ul class="search__dropdown" id="search-dropdown"></ul>
+  </div>
+
+  <div id="empty-state" class="empty-state">
+    <div class="empty-state__icon">🕐</div>
+    <div class="empty-state__title">No clocks added</div>
+    <div class="empty-state__subtitle">Search for a city to add a clock</div>
+  </div>
+
+  <div id="clock-list" class="clock-list"></div>
+
+  <script src="timezones.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
